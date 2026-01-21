@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Electronic Components Catalog</title>
+</head>
+<body>
+
+<h1>Products</h1>
+<ul id="list"></ul>
+
+<script>
+fetch("data/products.csv")
+  .then(res => res.text())
+  .then(text => {
+    const rows = text.split("\n").slice(1);
+    let html = "";
+    rows.forEach(row => {
+      const [item, , name] = row.split(",");
+      html += `<li>
+        <a href="product.html?item=${item}">
+          ${item} – ${name}
+        </a>
+      </li>`;
+    });
+    document.getElementById("list").innerHTML = html;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title id="meta-title"></title>
+  <meta name="description" id="meta-desc">
+  <script type="application/ld+json" id="faq-schema"></script>
+</head>
+<body>
+
+<h1 id="product-name"></h1>
+<p><strong>Item No:</strong> <span id="item-no"></span></p>
+<p><strong>Manufacturer:</strong> <span id="manufacturer"></span></p>
+<p><strong>Description:</strong> <span id="description"></span></p>
+
+<hr>
+<h2>FAQ</h2>
+<ul id="faq"></ul>
+
+<script>
+// Get URL param
+const params = new URLSearchParams(window.location.search);
+const itemNo = params.get("item");
+
+// Load CSV
+fetch("data/products.csv")
+  .then(res => res.text())
+  .then(text => {
+    const rows = text.split("\n").slice(1);
+    rows.forEach(row => {
+      const [item, manu, name, desc] = row.split(",");
+
+      if (item === itemNo) {
+        // Page content
+        document.getElementById("product-name").innerText = name;
+        document.getElementById("item-no").innerText = item;
+        document.getElementById("manufacturer").innerText = manu;
+        document.getElementById("description").innerText = desc;
+
+        // SEO Meta
+        document.getElementById("meta-title").innerText =
+          `${item} | ${name} | Datasheet & Price`;
+
+        document.getElementById("meta-desc").setAttribute(
+          "content",
+          `${item} by ${name}. ${desc}. Check specifications, availability, and FAQs.`
+        );
+
+        // FAQ
+        const faqHTML = `
+          <li>What is ${item}? – ${desc}</li>
+          <li>Who manufactures ${item}? – ${name}</li>
+          <li>Is ${item} in stock? – Contact us for availability.</li>
+        `;
+        document.getElementById("faq").innerHTML = faqHTML;
+
+        // FAQ Schema (SEO)
+        document.getElementById("faq-schema").innerHTML = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": `What is ${item}?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": desc
+              }
+            },
+            {
+              "@type": "Question",
+              "name": `Who manufactures ${item}?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": name
+              }
+            }
+          ]
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
