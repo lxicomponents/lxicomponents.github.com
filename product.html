@@ -1,84 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title id="meta-title"></title>
-  <meta name="description" id="meta-desc">
-  <script type="application/ld+json" id="faq-schema"></script>
+<meta charset="UTF-8">
+<title id="meta-title">Product</title>
+<meta name="description" id="meta-desc">
+
+<style>
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #f4f6fb;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 1150px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.hero {
+  background: linear-gradient(135deg,#0f172a,#1e293b);
+  color: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.hero span {
+  background: #38bdf8;
+  color: #0f172a;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  opacity: .9;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 20px;
+}
+
+.info-box {
+  background: #f1f5f9;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.info-box strong {
+  display: block;
+  font-size: 13px;
+  color: #475569;
+}
+
+.info-box span {
+  font-size: 15px;
+  margin-top: 5px;
+  display: block;
+}
+
+.faq {
+  margin-top: 40px;
+}
+
+.faq h3 {
+  margin-bottom: 15px;
+}
+
+.faq-item {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* FORM */
+.form-card {
+  margin-top: 40px;
+  background: #0f172a;
+  color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+.form-card h3 {
+  margin-bottom: 15px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background: #38bdf8;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #0ea5e9;
+}
+</style>
+
+<script type="application/ld+json" id="faq-schema"></script>
 </head>
+
 <body>
 
-<h1 id="product-name"></h1>
-<p><strong>Item No:</strong> <span id="item-no"></span></p>
-<p><strong>Manufacturer:</strong> <span id="manufacturer"></span></p>
-<p><strong>Description:</strong> <span id="description"></span></p>
+<div class="container">
 
-<hr>
-<h2>FAQ</h2>
-<ul id="faq"></ul>
+  <!-- HERO -->
+  <div class="hero">
+    <span id="manu"></span>
+    <h1 id="product-name"></h1>
+    <p id="short-desc"></p>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="card">
+    <h2>Product Specifications</h2>
+
+    <div class="grid">
+      <div class="info-box">
+        <strong>Item Number</strong>
+        <span id="item-no"></span>
+      </div>
+
+      <div class="info-box">
+        <strong>Manufacturer</strong>
+        <span id="manufacturer"></span>
+      </div>
+
+      <div class="info-box">
+        <strong>Description</strong>
+        <span id="description"></span>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+      <h3>Frequently Asked Questions</h3>
+      <div id="faq-list"></div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card">
+    <h3>Request Quote / More Information</h3>
+
+    <form>
+      <div class="form-grid">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="text" placeholder="Company Name">
+        <input type="tel" placeholder="Phone Number">
+      </div>
+
+      <textarea rows="4" placeholder="Message / Quantity Requirement"></textarea>
+
+      <button type="submit">Submit Enquiry</button>
+    </form>
+  </div>
+
+</div>
 
 <script>
-// Get URL param
+/* DEMO DATA (replace with CSV fetch in production) */
+const products = [
+  { item:"3448-89160", manu:"3M", name:"3M Company", desc:"Strain Relief" },
+  { item:"AAH-438-28.63636MHZ-T3", manu:"ABC", name:"Abracon Corporation", desc:"Crystal" },
+  { item:"ABS07AIG-32.768KHZ-6-T", manu:"ABC", name:"Abracon Corporation", desc:"Crystal 32.768khz 9pf" },
+  { item:"AISC-0402-3N3J-T", manu:"ABC", name:"Abracon Corporation", desc:"ND 3.3NH 840MA 66MOHM" }
+];
+
 const params = new URLSearchParams(window.location.search);
 const itemNo = params.get("item");
+const product = products.find(p => p.item === itemNo) || products[0];
 
-// Load CSV
-fetch("data/products.csv")
-  .then(res => res.text())
-  .then(text => {
-    const rows = text.split("\n").slice(1);
-    rows.forEach(row => {
-      const [item, manu, name, desc] = row.split(",");
+document.getElementById("product-name").innerText = product.item;
+document.getElementById("short-desc").innerText = product.desc;
+document.getElementById("item-no").innerText = product.item;
+document.getElementById("manufacturer").innerText = product.name;
+document.getElementById("description").innerText = product.desc;
+document.getElementById("manu").innerText = product.manu;
 
-      if (item === itemNo) {
-        // Page content
-        document.getElementById("product-name").innerText = name;
-        document.getElementById("item-no").innerText = item;
-        document.getElementById("manufacturer").innerText = manu;
-        document.getElementById("description").innerText = desc;
+/* SEO */
+document.getElementById("meta-title").innerText =
+`${product.item} | ${product.name} | Electronic Component`;
 
-        // SEO Meta
-        document.getElementById("meta-title").innerText =
-          `${item} | ${name} | Datasheet & Price`;
+document.getElementById("meta-desc").setAttribute(
+"content",
+`${product.item} by ${product.name}. ${product.desc}. Request quote and datasheet.`
+);
 
-        document.getElementById("meta-desc").setAttribute(
-          "content",
-          `${item} by ${name}. ${desc}. Check specifications, availability, and FAQs.`
-        );
+/* FAQ */
+document.getElementById("faq-list").innerHTML = `
+<div class="faq-item"><strong>What is ${product.item}?</strong><br>${product.desc}</div>
+<div class="faq-item"><strong>Who manufactures it?</strong><br>${product.name}</div>
+<div class="faq-item"><strong>How to buy?</strong><br>Submit enquiry for pricing.</div>
+`;
 
-        // FAQ
-        const faqHTML = `
-          <li>What is ${item}? – ${desc}</li>
-          <li>Who manufactures ${item}? – ${name}</li>
-          <li>Is ${item} in stock? – Contact us for availability.</li>
-        `;
-        document.getElementById("faq").innerHTML = faqHTML;
-
-        // FAQ Schema (SEO)
-        document.getElementById("faq-schema").innerHTML = JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": `What is ${item}?`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": desc
-              }
-            },
-            {
-              "@type": "Question",
-              "name": `Who manufactures ${item}?`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": name
-              }
-            }
-          ]
-        });
-      }
-    });
-  });
+document.getElementById("faq-schema").innerHTML = JSON.stringify({
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[{
+    "@type":"Question",
+    "name":`What is ${product.item}?`,
+    "acceptedAnswer":{"@type":"Answer","text":product.desc}
+  }]
+});
 </script>
 
 </body>
