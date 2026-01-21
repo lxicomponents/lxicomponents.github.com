@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title id="meta-title">Product</title>
+<title id="meta-title">Product Details</title>
 <meta name="description" id="meta-desc">
 
 <style>
@@ -20,16 +20,16 @@ body {
 }
 
 .hero {
-  background: linear-gradient(135deg,#0f172a,#1e293b);
+  background: linear-gradient(135deg,#020617,#1e293b);
   color: #fff;
-  padding: 40px;
-  border-radius: 16px;
+  padding: 45px;
+  border-radius: 18px;
   margin-bottom: 30px;
 }
 
 .hero span {
   background: #38bdf8;
-  color: #0f172a;
+  color: #020617;
   padding: 6px 14px;
   border-radius: 50px;
   font-size: 13px;
@@ -38,8 +38,8 @@ body {
 }
 
 .hero h1 {
-  font-size: 28px;
-  margin-bottom: 8px;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 .hero p {
@@ -48,21 +48,21 @@ body {
 
 .card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 30px;
   box-shadow: 0 20px 40px rgba(0,0,0,.08);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
   gap: 20px;
 }
 
 .info-box {
   background: #f1f5f9;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 18px;
+  border-radius: 14px;
 }
 
 .info-box strong {
@@ -73,36 +73,29 @@ body {
 
 .info-box span {
   font-size: 15px;
-  margin-top: 5px;
+  margin-top: 6px;
   display: block;
 }
 
+/* FAQ */
 .faq {
   margin-top: 40px;
-}
-
-.faq h3 {
-  margin-bottom: 15px;
 }
 
 .faq-item {
   background: #f8fafc;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 10px;
 }
 
 /* FORM */
 .form-card {
   margin-top: 40px;
-  background: #0f172a;
+  background: #020617;
   color: #fff;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 30px;
-}
-
-.form-card h3 {
-  margin-bottom: 15px;
 }
 
 .form-grid {
@@ -119,24 +112,18 @@ input, textarea {
   outline: none;
 }
 
-textarea {
-  resize: vertical;
-}
+textarea { resize: vertical; }
 
 button {
   background: #38bdf8;
   border: none;
   padding: 14px;
   border-radius: 10px;
-  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-button:hover {
-  background: #0ea5e9;
-}
+button:hover { background: #0ea5e9; }
 </style>
 
 <script type="application/ld+json" id="faq-schema"></script>
@@ -149,7 +136,7 @@ button:hover {
   <!-- HERO -->
   <div class="hero">
     <span id="manu"></span>
-    <h1 id="product-name"></h1>
+    <h1 id="product-name">Loading...</h1>
     <p id="short-desc"></p>
   </div>
 
@@ -184,7 +171,6 @@ button:hover {
   <!-- FORM -->
   <div class="form-card">
     <h3>Request Quote / More Information</h3>
-
     <form>
       <div class="form-grid">
         <input type="text" placeholder="Your Name" required>
@@ -192,9 +178,7 @@ button:hover {
         <input type="text" placeholder="Company Name">
         <input type="tel" placeholder="Phone Number">
       </div>
-
-      <textarea rows="4" placeholder="Message / Quantity Requirement"></textarea>
-
+      <textarea rows="4" placeholder="Quantity / Message"></textarea>
       <button type="submit">Submit Enquiry</button>
     </form>
   </div>
@@ -202,50 +186,63 @@ button:hover {
 </div>
 
 <script>
-/* DEMO DATA (replace with CSV fetch in production) */
-const products = [
-  { item:"3448-89160", manu:"3M", name:"3M Company", desc:"Strain Relief" },
-  { item:"AAH-438-28.63636MHZ-T3", manu:"ABC", name:"Abracon Corporation", desc:"Crystal" },
-  { item:"ABS07AIG-32.768KHZ-6-T", manu:"ABC", name:"Abracon Corporation", desc:"Crystal 32.768khz 9pf" },
-  { item:"AISC-0402-3N3J-T", manu:"ABC", name:"Abracon Corporation", desc:"ND 3.3NH 840MA 66MOHM" }
-];
+fetch("data/products.csv")
+  .then(res => res.text())
+  .then(text => {
 
-const params = new URLSearchParams(window.location.search);
-const itemNo = params.get("item");
-const product = products.find(p => p.item === itemNo) || products[0];
+    const rows = text.trim().split("\n").slice(1);
+    const products = rows.map(r => {
+      const cols = r.split(",");
+      return {
+        item: cols[0],
+        manu: cols[1],
+        name: cols[2],
+        desc: cols.slice(3).join(",") // SAFE for commas
+      };
+    });
 
-document.getElementById("product-name").innerText = product.item;
-document.getElementById("short-desc").innerText = product.desc;
-document.getElementById("item-no").innerText = product.item;
-document.getElementById("manufacturer").innerText = product.name;
-document.getElementById("description").innerText = product.desc;
-document.getElementById("manu").innerText = product.manu;
+    const params = new URLSearchParams(window.location.search);
+    const itemNo = params.get("item");
 
-/* SEO */
-document.getElementById("meta-title").innerText =
-`${product.item} | ${product.name} | Electronic Component`;
+    const product = products.find(p => p.item === itemNo);
+    if (!product) return;
 
-document.getElementById("meta-desc").setAttribute(
-"content",
-`${product.item} by ${product.name}. ${product.desc}. Request quote and datasheet.`
-);
+    // CONTENT
+    document.getElementById("product-name").innerText = product.item;
+    document.getElementById("short-desc").innerText = product.desc;
+    document.getElementById("item-no").innerText = product.item;
+    document.getElementById("manufacturer").innerText = product.name;
+    document.getElementById("description").innerText = product.desc;
+    document.getElementById("manu").innerText = product.manu;
 
-/* FAQ */
-document.getElementById("faq-list").innerHTML = `
-<div class="faq-item"><strong>What is ${product.item}?</strong><br>${product.desc}</div>
-<div class="faq-item"><strong>Who manufactures it?</strong><br>${product.name}</div>
-<div class="faq-item"><strong>How to buy?</strong><br>Submit enquiry for pricing.</div>
-`;
+    // SEO
+    document.getElementById("meta-title").innerText =
+      `${product.item} | ${product.name} | LXI Components`;
 
-document.getElementById("faq-schema").innerHTML = JSON.stringify({
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[{
-    "@type":"Question",
-    "name":`What is ${product.item}?`,
-    "acceptedAnswer":{"@type":"Answer","text":product.desc}
-  }]
-});
+    document.getElementById("meta-desc").setAttribute(
+      "content",
+      `${product.item} by ${product.name}. ${product.desc}. Request quote from LXI Components.`
+    );
+
+    // FAQ
+    document.getElementById("faq-list").innerHTML = `
+      <div class="faq-item"><strong>What is ${product.item}?</strong><br>${product.desc}</div>
+      <div class="faq-item"><strong>Who manufactures it?</strong><br>${product.name}</div>
+      <div class="faq-item"><strong>How to buy?</strong><br>Submit enquiry for pricing.</div>
+    `;
+
+    // FAQ SCHEMA
+    document.getElementById("faq-schema").innerHTML = JSON.stringify({
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[{
+        "@type":"Question",
+        "name":`What is ${product.item}?`,
+        "acceptedAnswer":{"@type":"Answer","text":product.desc}
+      }]
+    });
+
+  });
 </script>
 
 </body>
