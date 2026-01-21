@@ -1,29 +1,180 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Electronic Components Catalog</title>
+<meta charset="UTF-8">
+<title>Electronic Components Catalog</title>
+<meta name="description" content="Browse electronic components from leading manufacturers. Search part numbers, manufacturers, and specifications.">
+
+<style>
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #f4f6fb;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* HEADER */
+.hero {
+  background: linear-gradient(135deg,#0f172a,#1e293b);
+  color: #fff;
+  padding: 50px;
+  border-radius: 18px;
+  margin-bottom: 35px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  opacity: .9;
+  font-size: 15px;
+}
+
+/* SEARCH */
+.search-box {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+  gap: 25px;
+}
+
+/* PRODUCT CARD */
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 18px 35px rgba(0,0,0,.08);
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 45px rgba(0,0,0,.12);
+}
+
+.badge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 15px;
+}
+
+.card a {
+  display: inline-block;
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.count {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #475569;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Products</h1>
-<ul id="list"></ul>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Electronic Components Catalog</h1>
+    <p>Search and explore components from trusted manufacturers worldwide</p>
+
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Search by part number, manufacturer, description...">
+    </div>
+  </div>
+
+  <div class="count" id="count"></div>
+
+  <!-- PRODUCT GRID -->
+  <div class="grid" id="product-grid"></div>
+
+</div>
 
 <script>
-fetch("data/products.csv")
-  .then(res => res.text())
-  .then(text => {
-    const rows = text.split("\n").slice(1);
-    let html = "";
-    rows.forEach(row => {
-      const [item, , name] = row.split(",");
-      html += `<li>
-        <a href="product.html?item=${item}">
-          ${item} – ${name}
-        </a>
-      </li>`;
-    });
-    document.getElementById("list").innerHTML = html;
+/* DEMO DATA (Excel / CSV in production) */
+const products = [
+  { item:"3448-89160", manu:"3M", name:"3M Company", desc:"Strain Relief" },
+  { item:"AAH-438-28.63636MHZ-T3", manu:"ABC", name:"Abracon Corporation", desc:"Crystal" },
+  { item:"ABS07AIG-32.768KHZ-6-T", manu:"ABC", name:"Abracon Corporation", desc:"Crystal 32.768khz 9pf" },
+  { item:"AISC-0402-3N3J-T", manu:"ABC", name:"Abracon Corporation", desc:"ND 3.3NH 840MA 66MOHM" }
+];
+
+const grid = document.getElementById("product-grid");
+const search = document.getElementById("search");
+const count = document.getElementById("count");
+
+function render(data) {
+  grid.innerHTML = "";
+  count.innerText = `Showing ${data.length} products`;
+
+  data.forEach(p => {
+    grid.innerHTML += `
+      <div class="card">
+        <span class="badge">${p.manu}</span>
+        <h3>${p.item}</h3>
+        <p>${p.desc}</p>
+        <a href="product.html?item=${p.item}">View Product →</a>
+      </div>
+    `;
   });
+}
+
+render(products);
+
+/* SEARCH FUNCTION */
+search.addEventListener("input", () => {
+  const value = search.value.toLowerCase();
+  const filtered = products.filter(p =>
+    p.item.toLowerCase().includes(value) ||
+    p.manu.toLowerCase().includes(value) ||
+    p.name.toLowerCase().includes(value) ||
+    p.desc.toLowerCase().includes(value)
+  );
+  render(filtered);
+});
 </script>
 
 </body>
