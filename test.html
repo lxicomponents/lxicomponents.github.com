@@ -129,7 +129,7 @@ body {
   box-shadow: 0 15px 30px rgba(0,0,0,.06);
 }
 
-/* ================= FOOTER (MATCHED) ================= */
+/* ================= FOOTER ================= */
 .footer {
   background: #016fae;
   color: #ffffff;
@@ -162,29 +162,13 @@ body {
   text-decoration: underline;
 }
 
-/* CONTACT */
-.footer-contact p {
-  margin: 8px 0;
-}
-
-/* LINKS */
-.footer-links a {
-  display: block;
-  margin-bottom: 10px;
-}
-
 /* CERTIFICATIONS */
-.cert-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.cert-grid img {
+.cert-images img {
   width: 100%;
   background: #fff;
-  padding: 8px;
+  padding: 10px;
   border-radius: 6px;
+  margin-bottom: 12px;
 }
 
 /* COPYRIGHT */
@@ -200,10 +184,11 @@ body {
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <div class="logo">
-      <img src="logo.png" alt="LXI Components">
+      <img src="lxilogo.png" alt="LXI Components">
     </div>
     <nav class="nav">
       <a href="#">Home</a>
@@ -243,17 +228,22 @@ body {
 
 </div>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
 
-    <div class="footer-contact">
+    <div>
       <h4>CONTACT US</h4>
-      <p>LXI Components, Inc<br>2802 Leslie Road,<br>Tampa, FL 33619-2224</p>
+      <p>
+        LXI Components, Inc<br>
+        2802 Leslie Road,<br>
+        Tampa, FL 33619-2224
+      </p>
       <p>sales@lxicomponents.com</p>
       <p>813-663-9682</p>
     </div>
 
-    <div class="footer-links">
+    <div>
       <h4>LINKS</h4>
       <a href="#">Home</a>
       <a href="#">About Us</a>
@@ -264,7 +254,7 @@ body {
       <a href="#">Sitemap</a>
     </div>
 
-    <div class="footer-links">
+    <div>
       <h4>MARKET SOLUTIONS</h4>
       <a href="#">Government</a>
       <a href="#">Military</a>
@@ -275,12 +265,9 @@ body {
 
     <div>
       <h4>CERTIFICATIONS</h4>
-      <div class="cert-grid">
-        <img src="certs/iso9001.png" alt="ISO 9001">
-        <img src="certs/anab.png" alt="ANAB">
-        <img src="certs/ukas.png" alt="UKAS">
-        <img src="certs/as9120.png" alt="AS9120">
-        <img src="certs/hubzone.png" alt="HUBZone">
+      <div class="cert-images">
+        <img src="certifications.png" alt="Certifications">
+        <img src="hubzone.png" alt="HUBZone Certified">
       </div>
     </div>
 
@@ -303,7 +290,11 @@ fetch("data/products.csv")
     const rows = text.trim().split("\n").slice(1);
     products = rows.map(r => {
       const c = r.split(",");
-      return { item: c[0], manu: c[1], desc: c.slice(3).join(",") };
+      return {
+        item: c[0],
+        manu: c[1],
+        desc: c.slice(3).join(",")
+      };
     });
     renderLimited(products);
   });
