@@ -15,10 +15,11 @@ body {
 
 /* ================= HEADER ================= */
 .header {
-  background: #016fae;
+  background: #ffffff;
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .header-inner {
@@ -35,7 +36,7 @@ body {
 }
 
 .nav a {
-  color: #e0f2fe;
+  color: #000000;
   text-decoration: none;
   margin-left: 28px;
   font-size: 14px;
@@ -43,7 +44,7 @@ body {
 }
 
 .nav a:hover {
-  color: #ffffff;
+  color: #016fae;
 }
 
 /* ================= LAYOUT ================= */
@@ -224,11 +225,11 @@ body {
       <img src="lxilogo.png" alt="LXI Components">
     </div>
     <nav class="nav">
-      <a href="#">Home</a>
+      <a href="#">About Us</a>
       <a href="#">Products</a>
+      <a href="#">Franchises</a>
       <a href="#">Industries</a>
-      <a href="#">Quality</a>
-      <a href="#">Contact</a>
+      <a href="#">Contact Us</a>
     </nav>
   </div>
 </header>
@@ -264,7 +265,7 @@ body {
 
 </div>
 
-<!-- FOOTER -->
+<!-- FOOTER (unchanged) -->
 <footer class="footer">
   <div class="footer-inner">
 
@@ -281,29 +282,29 @@ body {
 
     <div>
       <h4>LINKS</h4>
-      <a href="#">Home</a></br>
-      <a href="#">About Us</a></br>
-      <a href="#">Franchises</a></br>
-      <a href="#">Products</a></br>
-      <a href="#">Line Card</a></br>
-      <a href="#">Contact Us</a></br>
+      <a href="#">Home</a><br>
+      <a href="#">About Us</a><br>
+      <a href="#">Franchises</a><br>
+      <a href="#">Products</a><br>
+      <a href="#">Line Card</a><br>
+      <a href="#">Contact Us</a><br>
       <a href="#">Sitemap</a>
     </div>
 
     <div>
       <h4>MARKET SOLUTIONS</h4>
-      <a href="#">Government</a></br>
-      <a href="#">Military</a></br>
-      <a href="#">Aerospace</a></br>
-      <a href="#">Marine</a></br>
-      <a href="#">Medical</a></br>
+      <a href="#">Government</a><br>
+      <a href="#">Military</a><br>
+      <a href="#">Aerospace</a><br>
+      <a href="#">Marine</a><br>
+      <a href="#">Medical</a>
     </div>
 
     <div>
       <h4>CERTIFICATIONS</h4>
       <div class="cert-images">
         <img src="certifications.png" alt="Certifications">
-        </div>
+      </div>
       <div class="hub-images">
         <img src="hubzone.png" alt="HUBZone">
       </div>
@@ -316,6 +317,7 @@ body {
   </div>
 </footer>
 
+<!-- JS remains unchanged -->
 <script>
 const grid = document.getElementById("product-grid");
 const search = document.getElementById("search");
@@ -337,7 +339,7 @@ fetch("data/products.csv")
         desc: c.slice(3).join(",")
       };
     });
-    renderLimited(products); // ONLY change: initial limit
+    renderLimited(products);
   });
 
 function renderLimited(data) {
