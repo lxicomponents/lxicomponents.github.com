@@ -15,7 +15,7 @@ body {
 
 /* ================= HEADER ================= */
 .header {
-  background: #020617;
+  background: #016fae;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -24,21 +24,18 @@ body {
 .header-inner {
   max-width: 1300px;
   margin: auto;
-  padding: 18px 24px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.logo {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: .4px;
+.logo img {
+  height: 42px;
 }
 
 .nav a {
-  color: #cbd5f5;
+  color: #e0f2fe;
   text-decoration: none;
   margin-left: 28px;
   font-size: 14px;
@@ -46,10 +43,10 @@ body {
 }
 
 .nav a:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
-/* ================= LAYOUT ================= */
+/* ================= MAIN ================= */
 .container {
   max-width: 1250px;
   margin: auto;
@@ -58,7 +55,7 @@ body {
 
 /* HERO */
 .hero {
-  background: linear-gradient(135deg,#020617,#1e293b);
+  background: linear-gradient(135deg,#016fae,#0284c7);
   color: #fff;
   padding: 60px;
   border-radius: 20px;
@@ -68,12 +65,6 @@ body {
   font-size: 36px;
 }
 
-.hero p {
-  max-width: 720px;
-  opacity: .9;
-}
-
-/* SEARCH */
 .search-box {
   margin-top: 30px;
 }
@@ -84,10 +75,9 @@ body {
   border-radius: 16px;
   border: none;
   font-size: 16px;
-  outline: none;
 }
 
-/* SEARCH RESULTS */
+/* PRODUCTS */
 .results {
   margin-top: 25px;
 }
@@ -98,22 +88,16 @@ body {
   gap: 25px;
 }
 
-/* PRODUCT CARD */
 .card {
   background: #fff;
   border-radius: 18px;
   padding: 25px;
   box-shadow: 0 18px 35px rgba(0,0,0,.08);
-  transition: .3s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
 }
 
 .badge {
   background: #e0f2fe;
-  color: #0369a1;
+  color: #016fae;
   padding: 6px 14px;
   border-radius: 50px;
   font-size: 12px;
@@ -121,19 +105,10 @@ body {
   margin-bottom: 10px;
 }
 
-.card h3 {
-  font-size: 16px;
-}
-
-.card p {
-  font-size: 14px;
-  color: #475569;
-}
-
 .card a {
-  text-decoration: none;
-  color: #2563eb;
+  color: #016fae;
   font-weight: 600;
+  text-decoration: none;
 }
 
 /* INDUSTRIES */
@@ -141,15 +116,10 @@ body {
   margin-top: 70px;
 }
 
-.section h2 {
-  font-size: 26px;
-}
-
 .industries {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
   gap: 20px;
-  margin-top: 20px;
 }
 
 .industry {
@@ -159,60 +129,85 @@ body {
   box-shadow: 0 15px 30px rgba(0,0,0,.06);
 }
 
-/* ================= FOOTER ================= */
+/* ================= FOOTER (MATCHED) ================= */
 .footer {
-  background: #020617;
-  color: #cbd5f5;
-  margin-top: 90px;
-  padding: 60px 20px;
+  background: #016fae;
+  color: #ffffff;
+  margin-top: 100px;
+  padding: 60px 20px 30px;
 }
 
 .footer-inner {
-  max-width: 1250px;
+  max-width: 1300px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
   gap: 40px;
 }
 
 .footer h4 {
-  color: #fff;
-  margin-bottom: 15px;
-  font-size: 15px;
+  margin-bottom: 18px;
+  font-size: 18px;
 }
 
+.footer p,
 .footer a {
-  display: block;
-  color: #cbd5f5;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #ffffff;
   text-decoration: none;
-  font-size: 14px;
-  margin-bottom: 8px;
 }
 
 .footer a:hover {
-  color: #fff;
+  text-decoration: underline;
 }
 
+/* CONTACT */
+.footer-contact p {
+  margin: 8px 0;
+}
+
+/* LINKS */
+.footer-links a {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* CERTIFICATIONS */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.cert-grid img {
+  width: 100%;
+  background: #fff;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* COPYRIGHT */
 .footer-bottom {
-  border-top: 1px solid #1e293b;
-  margin-top: 40px;
-  padding-top: 20px;
   text-align: center;
-  font-size: 13px;
-  opacity: .8;
+  margin-top: 40px;
+  font-size: 14px;
+  border-top: 1px solid rgba(255,255,255,.3);
+  padding-top: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <div class="logo">LXI Components</div>
+    <div class="logo">
+      <img src="logo.png" alt="LXI Components">
+    </div>
     <nav class="nav">
+      <a href="#">Home</a>
       <a href="#">Products</a>
-      <a href="#">Manufacturers</a>
       <a href="#">Industries</a>
       <a href="#">Quality</a>
       <a href="#">Contact</a>
@@ -222,78 +217,84 @@ body {
 
 <div class="container">
 
-  <!-- HERO -->
   <div class="hero">
     <h1>LXI Components</h1>
     <p>Global supplier of electronic components for mission-critical industries.</p>
-
     <div class="search-box">
       <input type="text" id="search" placeholder="Search part number, manufacturer, description...">
     </div>
   </div>
 
-  <!-- RESULTS -->
   <div class="results">
     <div class="grid" id="product-grid"></div>
   </div>
 
-  <!-- INDUSTRIES -->
   <div class="section" id="industries">
     <h2>Industries We Serve</h2>
-
     <div class="industries">
-      <div class="industry"><h4>Aerospace</h4><p>Flight-critical electronics</p></div>
-      <div class="industry"><h4>Medical</h4><p>Certified medical components</p></div>
-      <div class="industry"><h4>Marine</h4><p>Navigation & offshore systems</p></div>
-      <div class="industry"><h4>Government</h4><p>Secure supply chains</p></div>
-      <div class="industry"><h4>Aviation</h4><p>Avionics & aircraft systems</p></div>
-      <div class="industry"><h4>Industrial</h4><p>Automation & control</p></div>
+      <div class="industry"><h4>Aerospace</h4></div>
+      <div class="industry"><h4>Medical</h4></div>
+      <div class="industry"><h4>Marine</h4></div>
+      <div class="industry"><h4>Government</h4></div>
+      <div class="industry"><h4>Aviation</h4></div>
+      <div class="industry"><h4>Industrial</h4></div>
     </div>
   </div>
 
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <div>
-      <h4>LXI Components</h4>
-      Authorized sourcing<br>
-      Quality assurance<br>
-      Global logistics
+
+    <div class="footer-contact">
+      <h4>CONTACT US</h4>
+      <p>LXI Components, Inc<br>2802 Leslie Road,<br>Tampa, FL 33619-2224</p>
+      <p>sales@lxicomponents.com</p>
+      <p>813-663-9682</p>
     </div>
 
-    <div>
-      <h4>Company</h4>
+    <div class="footer-links">
+      <h4>LINKS</h4>
+      <a href="#">Home</a>
       <a href="#">About Us</a>
-      <a href="#">Quality Policy</a>
-      <a href="#">Certifications</a>
+      <a href="#">Franchises</a>
+      <a href="#">Products</a>
+      <a href="#">Line Card</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Sitemap</a>
     </div>
 
-    <div>
-      <h4>Industries</h4>
-      <a href="#">Aerospace</a>
-      <a href="#">Medical</a>
+    <div class="footer-links">
+      <h4>MARKET SOLUTIONS</h4>
       <a href="#">Government</a>
+      <a href="#">Military</a>
+      <a href="#">Aerospace</a>
+      <a href="#">Marine</a>
+      <a href="#">Medical</a>
     </div>
 
     <div>
-      <h4>Contact</h4>
-      <a href="#">Request a Quote</a>
-      <a href="#">Email Sales</a>
-      <a href="#">Global Offices</a>
+      <h4>CERTIFICATIONS</h4>
+      <div class="cert-grid">
+        <img src="certs/iso9001.png" alt="ISO 9001">
+        <img src="certs/anab.png" alt="ANAB">
+        <img src="certs/ukas.png" alt="UKAS">
+        <img src="certs/as9120.png" alt="AS9120">
+        <img src="certs/hubzone.png" alt="HUBZone">
+      </div>
     </div>
+
   </div>
 
   <div class="footer-bottom">
-    © 2026 LXI Components. All rights reserved.
+    © 2026 Copyright LXI Components. All Rights Reserved.
   </div>
 </footer>
 
 <script>
 const grid = document.getElementById("product-grid");
 const search = document.getElementById("search");
-const industries = document.getElementById("industries");
+const MAX_PRODUCTS = 12;
 let products = [];
 
 fetch("data/products.csv")
@@ -302,42 +303,41 @@ fetch("data/products.csv")
     const rows = text.trim().split("\n").slice(1);
     products = rows.map(r => {
       const c = r.split(",");
-      return {
-        item: c[0],
-        manu: c[1],
-        name: c[2],
-        desc: c.slice(3).join(",")
-      };
+      return { item: c[0], manu: c[1], desc: c.slice(3).join(",") };
     });
-    render(products);
+    renderLimited(products);
   });
 
-function render(data) {
+function renderLimited(data) {
   grid.innerHTML = "";
-  data.forEach(p => {
-    grid.innerHTML += `
-      <div class="card">
-        <span class="badge">${p.manu}</span>
-        <h3>${p.item}</h3>
-        <p>${p.desc}</p>
-        <a href="product.html?item=${p.item}">View Product →</a>
-      </div>`;
-  });
+  data.slice(0, MAX_PRODUCTS).forEach(p => addCard(p));
+}
+
+function renderAll(data) {
+  grid.innerHTML = "";
+  data.forEach(p => addCard(p));
+}
+
+function addCard(p) {
+  grid.innerHTML += `
+    <div class="card">
+      <span class="badge">${p.manu}</span>
+      <h3>${p.item}</h3>
+      <p>${p.desc}</p>
+      <a href="#">View Product →</a>
+    </div>`;
 }
 
 search.addEventListener("input", () => {
   const v = search.value.toLowerCase();
   if (v) {
-    industries.style.display = "none";
-    render(products.filter(p =>
+    renderAll(products.filter(p =>
       p.item.toLowerCase().includes(v) ||
       p.manu.toLowerCase().includes(v) ||
-      p.name.toLowerCase().includes(v) ||
       p.desc.toLowerCase().includes(v)
     ));
   } else {
-    industries.style.display = "block";
-    render(products);
+    renderLimited(products);
   }
 });
 </script>
