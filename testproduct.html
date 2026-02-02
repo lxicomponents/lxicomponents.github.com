@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 
 <title id="meta-title">Product | LXI Components</title>
-<meta name="description" id="meta-desc" content="LXI Components product details">
+<meta name="description" id="meta-desc">
 
 <style>
 body {
@@ -20,13 +20,13 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .header-inner {
   max-width: 1300px;
   margin: auto;
-  padding: 14px 24px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,7 +44,7 @@ body {
 
 .nav a:hover { color: #016fae; }
 
-/* ================= PRODUCT PAGE ================= */
+/* ================= PAGE ================= */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -95,6 +95,25 @@ body {
   border-radius: 14px;
 }
 
+.info strong {
+  display: block;
+  font-size: 13px;
+  color: #475569;
+}
+
+.info span {
+  display: block;
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+/* CONTENT */
+.section { margin-top: 45px; }
+.section h3 { margin-bottom: 12px; }
+
+ul { padding-left: 18px; }
+ul li { margin-bottom: 6px; }
+
 /* FAQ */
 .faq-item {
   background: #f8fafc;
@@ -103,32 +122,33 @@ body {
   margin-bottom: 10px;
 }
 
-/* ================= RFQ FORM ================= */
-.rfq-wrapper {
+/* ================= RFQ FORM (WHITE & FRIENDLY) ================= */
+.form-card {
   margin-top: 60px;
   background: #ffffff;
-  padding: 45px;
   border-radius: 22px;
-  box-shadow: 0 22px 45px rgba(0,0,0,.08);
+  padding: 50px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.08);
 }
 
-.rfq-wrapper h2 {
-  font-size: 22px;
+.form-card h3 {
+  font-size: 24px;
   margin-bottom: 35px;
+  color: #016fae;
 }
 
 .rfq-row {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 35px;
-  margin-bottom: 35px;
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
 .rfq-group label {
+  display: block;
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 6px;
-  display: block;
 }
 
 .rfq-group label span { color: red; }
@@ -137,44 +157,62 @@ body {
 .rfq-group select,
 .rfq-group textarea {
   width: 100%;
-  border: none;
-  border-bottom: 2px solid #d1d5db;
-  padding: 10px 4px;
+  padding: 12px 14px;
   font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
   outline: none;
+  transition: .2s;
 }
 
 .rfq-group input:focus,
 .rfq-group select:focus,
 .rfq-group textarea:focus {
   border-color: #016fae;
+  background: #ffffff;
 }
+
+.rfq-group textarea { resize: none; }
 
 .rfq-actions {
   display: flex;
   justify-content: center;
   gap: 25px;
+  margin-top: 35px;
 }
 
 .btn-outline,
 .btn-primary {
-  padding: 10px 36px;
+  padding: 12px 40px;
   border-radius: 25px;
   font-size: 15px;
   cursor: pointer;
+  transition: .2s;
+}
+
+.btn-outline {
+  border: 2px solid #9ca3af;
   background: transparent;
+  color: #374151;
 }
 
-.btn-outline { border: 2px solid #9ca3af; }
-.btn-primary { border: 2px solid #016fae; color: #016fae; }
-
-.btn-outline:hover,
-.btn-primary:hover {
+.btn-primary {
+  border: 2px solid #016fae;
   background: #016fae;
-  color: #fff;
+  color: #ffffff;
 }
 
-/* ================= FOOTER (UNCHANGED) ================= */
+.btn-outline:hover {
+  background: #f1f5f9;
+}
+
+.btn-primary:hover {
+  background: #0284c7;
+  border-color: #0284c7;
+}
+
+/* ================= FOOTER ================= */
 .footer {
   background: #016fae;
   color: #ffffff;
@@ -190,36 +228,32 @@ body {
   gap: 40px;
 }
 
-.footer h4 {
-  margin-bottom: 18px;
-  font-size: 18px;
-}
+.footer h4 { margin-bottom: 18px; }
 
-.footer p,
-.footer a {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #ffffff;
+.footer a, .footer p {
+  color: #fff;
   text-decoration: none;
+  line-height: 1.7;
 }
 
 .footer a:hover { text-decoration: underline; }
 
 .cert-images img,
 .hub-images img {
-  width: 100%;
   background: #fff;
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 12px;
 }
 
+.hub-images img { width: 50%; }
+
 .footer-bottom {
   text-align: center;
   margin-top: 40px;
-  font-size: 14px;
   border-top: 1px solid rgba(255,255,255,.3);
   padding-top: 15px;
+  font-size: 14px;
 }
 </style>
 
@@ -228,12 +262,9 @@ body {
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <div class="logo">
-      <img src="lxilogo.png" alt="LXI Components">
-    </div>
+    <div class="logo"><img src="lxilogo.png" alt="LXI Components"></div>
     <nav class="nav">
       <a href="#">About Us</a>
       <a href="#">Products</a>
@@ -247,17 +278,23 @@ body {
 <div class="container">
 
   <div class="hero">
-    <span id="manu"></span>
-    <h1 id="product-name"></h1>
+    <span id="manu">Loading...</span>
+    <h1 id="product-name">Loading Product</h1>
     <p id="short-desc"></p>
   </div>
 
   <div class="card">
     <h2>Product Specifications</h2>
+
     <div class="grid">
       <div class="info"><strong>Part Number</strong><span id="item-no"></span></div>
       <div class="info"><strong>Manufacturer</strong><span id="manufacturer"></span></div>
       <div class="info"><strong>Description</strong><span id="description"></span></div>
+    </div>
+
+    <div class="section">
+      <h3>Product Overview</h3>
+      <p id="overview"></p>
     </div>
 
     <div class="section">
@@ -267,23 +304,45 @@ body {
   </div>
 
   <!-- RFQ FORM -->
-  <div class="rfq-wrapper">
-    <h2>REQUEST FOR QUOTE</h2>
+  <div class="form-card">
+    <h3>REQUEST FOR QUOTE</h3>
+
     <form>
       <div class="rfq-row">
-        <div class="rfq-group"><label>Products<span>*</span></label><input id="rfq-product" required></div>
-        <div class="rfq-group"><label>Manufacturer<span>*</span></label><input id="rfq-manu" required></div>
-      </div>
-      <div class="rfq-row">
-        <div class="rfq-group"><label>Name<span>*</span></label><input required></div>
-        <div class="rfq-group"><label>Email<span>*</span></label><input type="email" required></div>
-        <div class="rfq-group"><label>Phone<span>*</span></label><input required></div>
-      </div>
-      <div class="rfq-row">
-        <div class="rfq-group"><label>Quantity<span>*</span></label><input type="number" required></div>
         <div class="rfq-group">
-          <label>What describes you<span>*</span></label>
+          <label>Products <span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="rfq-group">
+          <label>Manufacturer <span>*</span></label>
+          <input type="text" required>
+        </div>
+      </div>
+
+      <div class="rfq-row">
+        <div class="rfq-group">
+          <label>Name <span>*</span></label>
+          <input type="text" required>
+        </div>
+        <div class="rfq-group">
+          <label>Email <span>*</span></label>
+          <input type="email" required>
+        </div>
+        <div class="rfq-group">
+          <label>Phone <span>*</span></label>
+          <input type="tel" required>
+        </div>
+      </div>
+
+      <div class="rfq-row">
+        <div class="rfq-group">
+          <label>Quantity <span>*</span></label>
+          <input type="number" required>
+        </div>
+        <div class="rfq-group">
+          <label>What describes you <span>*</span></label>
           <select required>
+            <option value="">Select</option>
             <option>OEM</option>
             <option>Distributor</option>
             <option>Broker</option>
@@ -291,8 +350,12 @@ body {
             <option>End User</option>
           </select>
         </div>
-        <div class="rfq-group"><label>Comments<span>*</span></label><textarea rows="3" required></textarea></div>
+        <div class="rfq-group">
+          <label>Comments <span>*</span></label>
+          <textarea rows="3" required></textarea>
+        </div>
       </div>
+
       <div class="rfq-actions">
         <button type="reset" class="btn-outline">Reset</button>
         <button type="submit" class="btn-primary">Submit</button>
@@ -302,16 +365,11 @@ body {
 
 </div>
 
-<!-- FOOTER (EXACT COPY – UNCHANGED) -->
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <h4>CONTACT US</h4>
-      <p>
-        LXI Components, Inc<br>
-        2802 Leslie Road,<br>
-        Tampa, FL 33619-2224
-      </p>
+      <p>LXI Components, Inc<br>2802 Leslie Road<br>Tampa, FL 33619-2224</p>
       <p>sales@lxicomponents.com</p>
       <p>813-663-9682</p>
     </div>
@@ -322,7 +380,7 @@ body {
       <a href="#">About Us</a><br>
       <a href="#">Franchises</a><br>
       <a href="#">Products</a><br>
-      <a href="#">Contact Us</a>
+      <a href="#">Sitemap</a>
     </div>
 
     <div>
@@ -336,12 +394,8 @@ body {
 
     <div>
       <h4>CERTIFICATIONS</h4>
-      <div class="cert-images">
-        <img src="certifications.png" alt="Certifications">
-      </div>
-      <div class="hub-images">
-        <img src="hubzone.png" alt="HUBZone">
-      </div>
+      <div class="cert-images"><img src="certifications.png"></div>
+      <div class="hub-images"><img src="hubzone.png"></div>
     </div>
   </div>
 
@@ -352,16 +406,17 @@ body {
 
 <script>
 fetch("data/products.csv")
-.then(r => r.text())
-.then(t => {
-  const rows = t.trim().split("\n").slice(1);
+.then(res => res.text())
+.then(text => {
+  const rows = text.trim().split("\n").slice(1);
   const products = rows.map(r => {
     const c = r.split(",");
     return { item:c[0], manu:c[1], name:c[2], desc:c.slice(3).join(",") };
   });
 
-  const p = products.find(x => x.item === new URLSearchParams(location.search).get("item"));
-  if(!p) return;
+  const itemNo = new URLSearchParams(window.location.search).get("item");
+  const p = products.find(x => x.item === itemNo);
+  if (!p) return;
 
   product-name.innerText = p.item;
   short-desc.innerText = p.desc;
@@ -370,19 +425,16 @@ fetch("data/products.csv")
   description.innerText = p.desc;
   manu.innerText = p.manu;
 
-  document.getElementById("meta-title").innerText =
-    `${p.item} | ${p.name} Electronic Component | LXI Components`;
+  overview.innerText = `${p.item} by ${p.name} is supplied by LXI Components for mission-critical applications.`;
 
-  document.getElementById("meta-desc").content =
-    `${p.item} manufactured by ${p.name}. ${p.desc}`;
-
-  rfq-product.value = p.item;
-  rfq-manu.value = p.name;
+  meta-title.innerText = `${p.item} | ${p.name} | LXI Components`;
+  meta-desc.content = `${p.item} manufactured by ${p.name}. ${p.desc}. Request pricing and availability from LXI Components.`;
 
   faq-list.innerHTML = `
     <div class="faq-item"><strong>What is ${p.item}?</strong><br>${p.desc}</div>
     <div class="faq-item"><strong>Who manufactures it?</strong><br>${p.name}</div>
-    <div class="faq-item"><strong>How can I buy it?</strong><br>Submit the RFQ form above.</div>`;
+    <div class="faq-item"><strong>How can I purchase?</strong><br>Submit the RFQ form.</div>
+  `;
 });
 </script>
 
