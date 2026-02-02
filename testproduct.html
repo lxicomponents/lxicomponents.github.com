@@ -48,7 +48,7 @@ body {
   color: #016fae;
 }
 
-/* ================= PRODUCT PAGE ================= */
+/* ================= PAGE ================= */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -263,6 +263,7 @@ button:hover { background: #0ea5e9; }
 
   <!-- DETAILS -->
   <div class="card">
+
     <h2>Product Specifications</h2>
 
     <div class="grid">
@@ -295,12 +296,19 @@ button:hover { background: #0ea5e9; }
       </ul>
     </div>
 
+    <!-- ✅ DYNAMIC PARAGRAPH ADDED -->
+    <div class="section">
+      <p id="dynamic-paragraph"></p>
+    </div>
+
     <div class="section">
       <h3>Frequently Asked Questions</h3>
       <div id="faq-list"></div>
     </div>
+
   </div>
 
+  <!-- FORM -->
   <div class="form-card">
     <h3>Request Quote / Availability</h3>
     <form>
@@ -369,6 +377,7 @@ button:hover { background: #0ea5e9; }
 fetch("data/products.csv")
   .then(res => res.text())
   .then(text => {
+
     const rows = text.trim().split("\n").slice(1);
     const products = rows.map(r => {
       const c = r.split(",");
@@ -393,9 +402,12 @@ fetch("data/products.csv")
     document.getElementById("manu").innerText = product.manu;
 
     document.getElementById("overview").innerText =
-      `${product.item} by ${product.name} is supplied by LXI Components for mission-critical applications.`;
+      `${product.item} is supplied by LXI Components for high-reliability and mission-critical applications.`;
 
-    /* DYNAMIC SEO */
+    document.getElementById("dynamic-paragraph").innerText =
+      `${product.item} by ${product.name} is widely used across aerospace, medical, marine, aviation, and industrial applications. LXI Components ensures authentic sourcing, full traceability, and competitive pricing for this electronic component.`;
+
+    /* SEO */
     document.getElementById("meta-title").innerText =
       `${product.item} | ${product.name} Electronic Component | LXI Components`;
 
@@ -407,8 +419,18 @@ fetch("data/products.csv")
     document.getElementById("faq-list").innerHTML = `
       <div class="faq-item"><strong>What is ${product.item}?</strong><br>${product.desc}</div>
       <div class="faq-item"><strong>Who manufactures it?</strong><br>${product.name}</div>
-      <div class="faq-item"><strong>How can I buy it?</strong><br>Submit the enquiry form for pricing.</div>
+      <div class="faq-item"><strong>How can I purchase?</strong><br>Submit the enquiry form for pricing.</div>
     `;
+
+    document.getElementById("faq-schema").innerHTML = JSON.stringify({
+      "@context":"https://schema.org",
+      "@type":"FAQPage",
+      "mainEntity":[{
+        "@type":"Question",
+        "name":`What is ${product.item}?`,
+        "acceptedAnswer":{"@type":"Answer","text":product.desc}
+      }]
+    });
   });
 </script>
 
